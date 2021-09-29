@@ -1,11 +1,53 @@
 	
-	body {
+body {
 		
-		background-color: #B1CBA6;
-	}
-	
-	h1 {
 		
-		margin-left: 100px;
-		padding: 25px;
-	}
+	background-image: url(https://www.sciencenews.org/wp-content/uploads/2021/07/070321_CG_trees_feat.jpg);
+	font-family: Verdana;
+}
+
+.title h1 {
+  		
+  	text-align: center;
+  	font-size: 60px;
+  	font-family: Verdana;
+  	border-color: #597D35;
+}
+
+
+.topnav {
+  	display: flex;
+
+}
+
+
+.topnav a {
+  	float: left;
+  	color: black;
+  	background-color: #9DC183;
+  	text-decoration: underline;
+  	padding: 30px;
+  	font-size: 20px;
+  	font-weight: bold;
+  	flex:1;
+  	text-align: center;
+}
+
+.topnav a:hover {
+  	background-color: #BEE5B0;
+  	color: black;
+  	text-align: center;
+}
+
+.topnav a.active {
+  	background-color: #BEE5B0;
+  	color: black;
+}
+
+.center  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
