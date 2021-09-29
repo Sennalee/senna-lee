@@ -6,12 +6,35 @@ body {
 	font-family: Verdana;
 }
 
+header {
+			padding: 20px;
+			text-align: center;
+			font-family: Verdana;
+			color: #000000;
+			background-color: #9DC183;
+			border-style: solid;
+			border-color: #597D35;
+			font-weight: bold;
+			border-width: 6px;
+
+}
+
+nav{
+
+			font-family: Verdana;
+			margin: 10px;
+
+			padding: 5px;
+
+}
+
+
 .title h1 {
   		
   	text-align: center;
-  	font-size: 60px;
+  	font-size: 40px;
   	font-family: Verdana;
-  	border-color: #597D35;
+  	border-color: #597D35
 }
 
 
@@ -31,23 +54,35 @@ body {
   	font-weight: bold;
   	flex:1;
   	text-align: center;
+
+  	border-style: solid;
+  	border-color: #597D35;
+		border-radius: 25px;
+
+
+  	
 }
 
 .topnav a:hover {
-  	background-color: #BEE5B0;
+  	background-color: #C7EA46;
   	color: black;
   	text-align: center;
+
+  	border-style: solid;
+  	border-color: #597D35;
+		border-radius: 25px;
+
 }
 
 .topnav a.active {
-  	background-color: #BEE5B0;
+  	background-color: #C7EA46;
   	color: black;
-}
 
-.center  {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  	border-style: solid;
+  	border-color: #597D35;
+		border-radius: 25px;
 
 }
+
+
 
