@@ -42,7 +42,7 @@ nav{
 
 .topnav a {
   	float: left;
-  	color: black;
+  	font-color: #000000;
   	background-color: #9DC183;
   	text-decoration: underline;
   	padding: 30px;
@@ -61,7 +61,7 @@ nav{
 
 .topnav a:hover {
   	background-color: #C7EA46;
-  	color: black;
+  	font-color: #000000;
   	text-align: center;
 
   	border-style: solid;
@@ -72,8 +72,7 @@ nav{
 
 .topnav a.active {
   	background-color: #C7EA46;
-  	color: black;
-
+  	font-color: #000000;
   	border-style: solid;
   	border-color: #597D35;
 		border-radius: 25px;
