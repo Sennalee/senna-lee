@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="xml_stylesheet.css"?>
+<set>
+<title>
+	<set_title>Senna's Setlist</set_title>
+	<date>Summer 2022</date>
+</title>
+
+<song_list>
+
+<song>
+	<song_title>Traveller &#xA;</song_title>
+	<artist>Artist: Chris Stapleton</artist>
+	<genre>Genre: Country</genre>
+	<released>Released: 2015</released>
+</song>
+
+<song>
+	<song_title>Blister in the Sun</song_title>
+	<artist>Artist: Violent Femmes</artist>
+	<genre>Genre: Alternative/Indie</genre>
+	<released>Released: 1983</released>
+</song>
+
+<song>
+	<song_title>Transportin'</song_title>
+	<artist>Artist: Kodak Black</artist>
+	<genre>Genre: Hip Hop/Rap</genre>
+	<released>Released: 2017</released>
+</song>
+
+<song>
+	<song_title>Primadonna Girl</song_title>
+	<artist>Artist: Marina</artist>
+	<genre>Genre: Pop</genre>
+	<released>Released: 2012</released>
+</song>
+
+<song>
+	<song_title>Hell n Back</song_title>
+	<artist>Artist: Bakar</artist>
+	<genre>Genre: Alternative/Indie</genre>
+	<released>Released: 2019</released>
+</song>
+
+<song>
+	<song_title>Travelin' Soldier</song_title>
+	<artist>Artist: The Chicks</artist>
+	<genre>Genre: Country</genre>
+	<released>Released: 2002</released>
+</song>
+
+<song>
+	<song_title>Redbone</song_title>
+	<artist>Artist: Childish Gambino</artist>
+	<genre>Genre: Hip Hop/Rap</genre>
+	<released>Released: 2016</released>
+</song>
+
+<song>
+	<song_title>Midnight Train to Georgia</song_title>
+	<artist>Artist: Indigo Girls</artist>
+	<genre>Genre: Soft Rock</genre>
+	<released>Released: 1995</released>
+</song>
+
+<song>
+	<song_title>XS</song_title>
+	<artist>Artist: Rina Sawayama</artist>
+	<genre>Genre: Rock/Alternative/Indie</genre>
+	<released>Released: 2020</released>
+</song>	
+
+<song>
+	<song_title>Good News</song_title>
+	<artist>Artist: Mac Miller</artist>
+	<genre>Genre: Hip Hop/Rap</genre>
+	<released>Released: 2011</released>
+</song>
+
+</song_list>
+</set>
