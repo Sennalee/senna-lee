@@ -2,8 +2,6 @@
 <html>
 <head>
   <link href="HW4stylesheet.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
@@ -11,66 +9,57 @@
 </head>
 
 <body>
-
   <h1>Welcome to Joe's Hotdog Stand!</h1>
+  <div class = "content" >
+    <div class = "column">
+      <div class= "row">
+        <div class="column">
+          <h2><u>Prices:</u></h2> 
 
-<div class = "content" >
-<div class = "column">
-<div class= "row">
+          <p>Hotdogs: $3.25 each</p>
+          <p>Fries: $2.00 each</p>
+          <p>Drinks: $1.50 each</p>
+        </div>
+        <div class="column">
+          <h2><u>Your order:</u></h2>
 
-  <div class="column">
+          <p id="hotdogs"></p>
+          <p id="fries"></p>
+          <p id="drinks"></p>
+          <p id="subtotal"></p>
+          <p id="qualified"></p>
+          <p id="tax"></p>
+          <p id="total"></p>
 
-    <h2><u>Prices:</u></h2> 
+          <script>
+            var hotdogs = parseInt(prompt("How many hotdogs would you like?"));
+            var fries = parseInt(prompt("How many fries would you like?"));
+            var drinks = parseInt(prompt("How many drinks would you like?"));
 
-    <p>Hotdogs: $3.25 each</p>
-    <p>Fries: $2.00 each</p>
-    <p>Drinks: $1.50 each</p>
+            var total =  3.25*(hotdogs) + 2.00*(fries) + 1.50*(drinks);
 
+            document.getElementById("hotdogs").innerHTML = (hotdogs + " Hotdog(s): " + "$" + (3.25*(hotdogs)).toFixed(2));
+            document.getElementById("fries").innerHTML = (fries + " Frie(s): " + "$" + (2.00*(fries)).toFixed(2));
+            document.getElementById("drinks").innerHTML = (drinks + " Drink(s): " + "$" + (1.50*(drinks)).toFixed(2));
+
+            document.getElementById("subtotal").innerHTML = "Subtotal: $" + (total).toFixed(2);
+
+            if (total > 20) {
+              total = total - .1*(total);
+              var str = "You qualified for our 10% discount!";
+              var result = str.italics();
+              document.getElementById("qualified").innerHTML = result;
+            }
+
+            var tax = .0625*(total)
+            total = total + tax;
+
+            document.getElementById("tax").innerHTML = "Meals Tax: $" + (tax).toFixed(2);
+            document.getElementById("total").innerHTML = "Total: $" + (total).toFixed(2);
+          </script>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="column">
-    <h2><u>Your order:</u></h2>
-
-    <p id="hotdogs"></p>
-    <p id="fries"></p>
-    <p id="drinks"></p>
-    <p id="subtotal"></p>
-    <p id="qualified"></p>
-    <p id="tax"></p>
-    <p id="total"></p>
-
-
-
-    <script>
-      var hotdogs = parseInt(prompt("How many hotdogs would you like?"));
-      var fries = parseInt(prompt("How many fries would you like?"));
-      var drinks = parseInt(prompt("How many drinks would you like?"));
-
-      var total =  3.25*(hotdogs) + 2.00*(fries) + 1.50*(drinks);
-
-      document.getElementById("hotdogs").innerHTML = (hotdogs + " Hotdog(s): " + "$" + (3.25*(hotdogs)).toFixed(2));
-      document.getElementById("fries").innerHTML = (fries + " Frie(s): " + "$" + (2.00*(fries)).toFixed(2));
-      document.getElementById("drinks").innerHTML = (drinks + " Drink(s): " + "$" + (1.50*(drinks)).toFixed(2));
-
-      document.getElementById("subtotal").innerHTML = "Subtotal: $" + (total).toFixed(2);
-
-      if (total > 20) {
-        total = total - .1*(total);
-        var str = "You qualified for our 10% discount!";
-        var result = str.italics();
-        document.getElementById("qualified").innerHTML = result;
-      }
-
-      var tax = .0625*(total)
-      total = total + tax;
-
-      document.getElementById("tax").innerHTML = "Meals Tax: $" + (tax).toFixed(2);
-      document.getElementById("total").innerHTML = "Total: $" + (total).toFixed(2);
-    </script>
-  </div>
-</div>
-</div>
-</div>
-
 </body>
 </html>
