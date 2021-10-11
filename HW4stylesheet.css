@@ -16,27 +16,18 @@ h1{
 h2 {
 
 	font-size: 40px;
-	margin-bottom: -10px;
 	font-family: "Oswald";
-	padding-left: 20px;
 }
 
-.prices {
+.content {
 
-	font-size: 33px;
+	font-size: 30px;
 	margin-bottom: -10px;
 	padding: 15px;
 	font-family: "Roboto Mono";
 
 }
 
-.order {
-
-	font-size: 33px;
-	padding: 15px;
-	font-family: "Roboto Mono";
-
-}
 
 .column {
 
