@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lottery</title>
+</head>
+
+<body>
+	<p id="5Guess"></p>
+    <p id="luckyGuess"></p>
+    <br>
+    <p id="winningNums"></p>
+    <p id="luckyNum"></p>
+    <br>
+    <p id="outcome"></p>
+
+    <script>
+    	var numbers = prompt("Enter five numbers between 1-48 separated by a space");
+    	var lucky = prompt("Enter lucky ball number (1-18)");
+
+    	numbers = numbers.split(" ");
+    	numbers.sort(function(a, b){return a-b});
+
+    	document.getElementById("5Guess").innerHTML = ("Your five numbers are: " + numbers.join(" "));
+        document.getElementById("luckyGuess").innerHTML = ("Your lucky ball number is: " + lucky);
+
+        var realNums = [];
+        var matches = 0;
+
+        for (var i=0;i<5;i++){
+          
+        	realNums.push(Math.floor(Math.random() * (49 - 1 + 1) + 1));
+          
+        	if (numbers.includes(String(realNums[i]))) {
+        		matches++;
+          	}
+        }
+
+        realNums.sort(function(a, b){return a-b});
+        document.getElementById("winningNums").innerHTML = ("The five winning numbers are: " + realNums.join(" "));
+
+        var realLucky = Math.floor(Math.random() * (19 - 1 + 1) + 1);
+        document.getElementById("luckyNum").innerHTML = ("The lucky ball number is: " + realLucky);
+
+        var ballMatch = Boolean(lucky == realLucky);
+
+        if (matches == 0) {
+          if (!ballMatch) {
+            document.getElementById("outcome").innerHTML = ("You Lost :(");
+          } else {
+            document.getElementById("outcome").innerHTML = ("You Win $4!");
+          }
+        } else if (matches == 1) {
+          if (!ballMatch) {
+            document.getElementById("outcome").innerHTML = ("You Lost :(");
+          } else {
+            document.getElementById("outcome").innerHTML = ("You Win $6!");
+          }
+        } else if (matches == 2) {
+          if (!ballMatch) {
+            document.getElementById("outcome").innerHTML = ("You Win $3!");
+          } else {
+            document.getElementById("outcome").innerHTML = ("You Win $25!");
+          }
+        } else if (matches == 3) {
+          if (!ballMatch){
+            document.getElementById("outcome").innerHTML = ("You Win $20!");
+          } else {
+            document.getElementById("outcome").innerHTML = ("You Win $150!");
+          }
+        } else if (matches == 4) {
+          if (!ballMatch){
+            document.getElementById("outcome").innerHTML = ("You Win $200!");
+          } else {
+            document.getElementById("outcome").innerHTML = ("You Win $5000!");
+          }
+        } else if (matches == 5) {
+          if (!ballMatch){
+            document.getElementById("outcome").innerHTML = ("You Win $25,000 a YEAR for LIFE!");
+          } else {
+            document.getElementById("outcome").innerHTML = ("You Win $7,000 a WEEK for LIFE!");
+          }
+        }
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
