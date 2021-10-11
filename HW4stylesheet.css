@@ -1,0 +1,45 @@
+body {
+
+	background-color: #FF2E2E;
+	color: #FFFF00;
+	padding-left: 20px;
+
+}
+
+h1{
+
+	font-size: 50px;
+	font-family: "Oswald";
+
+}
+
+h2 {
+
+	font-size: 35px;
+	margin-bottom: -10px;
+	font-family: "Oswald";
+	padding-left: 20px;
+}
+
+.prices {
+
+	font-size: 20px;
+	margin-bottom: -10px;
+	padding: 15px;
+	font-family: "Roboto Mono";
+
+}
+
+.order {
+
+	font-size: 20px;
+	padding: 15px;
+	font-family: "Roboto Mono";
+
+}
+
+.column {
+
+	column-count: 2;
+	column-gap: 20px;	
+}
