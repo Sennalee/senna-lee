@@ -1,0 +1,23 @@
+h1 {
+
+	font-family:  "Fredoka One";
+	font-size: 40px;
+	color: #FFFFFF;
+}
+
+body {
+
+	background-color: #000000;
+	color: #FFFFFF;
+	font-family:  "Fredoka One";
+	font-size: 20px;
+	padding-left: 40px;
+}
+
+.final {
+
+	font-size: 40px;
+	color: #FFFF00;
+
+
+}
