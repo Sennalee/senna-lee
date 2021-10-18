@@ -18,7 +18,7 @@
       <br>
       <label for="number2">Number 2:</label><br>
       <input type="text" id="number2"><br><br>
-      <input type="button" value="GO" onclick="eventListener()"><br>
+      <input type="button" value="GO" onclick="amicablefunction()"><br>
     </form><br>
 
     <p id="factors1"></p>
@@ -30,71 +30,60 @@
 
 
 <script>
-function eventListener() {
 
-        num1 = parseInt(document.getElementById("number1").value);
-        num2 = parseInt(document.getElementById("number2").value);
-        document.getElementById("amicable").reset();
+  function amicablefunction() {
 
-        var num1factors = getFactors(num1);
-        document.getElementById("factors1").innerHTML = ("The factors of " + num1 + " are: " + num1factors.join(", "));
-        var num2factors = getFactors(num2);
-        document.getElementById("factors2").innerHTML = ("The factors of " + num2 + " are: " + num2factors.join(", "));
-        var sum1 = addArray(num1factors);
-        var sum2 = addArray(num2factors);
+    num1 = parseInt(document.getElementById("number1").value);
+    num2 = parseInt(document.getElementById("number2").value);
+    document.getElementById("amicable").reset();
 
-        if (sum2 == num1 && sum1 == num2) {
-          document.getElementById("result").innerHTML = "Your numbers are amicable!";
-        } else {
-          document.getElementById("result").innerHTML = "Your numbers are NOT amicable :(";
-        }
+    var num1factors = getFactors(num1);
+    document.getElementById("factors1").innerHTML = ("The factors of " + num1 + " are: " + num1factors.join(", "));
+    var num2factors = getFactors(num2);
+    document.getElementById("factors2").innerHTML = ("The factors of " + num2 + " are: " + num2factors.join(", "));
+    var sum1 = addArray(num1factors);
+    var sum2 = addArray(num2factors);
+
+    if (sum2 == num1 && sum1 == num2) {
+        document.getElementById("result").innerHTML = "Your numbers are amicable!";
+    } else {
+        document.getElementById("result").innerHTML = "Your numbers are NOT amicable :(";
       }
+    }
 
-      function readAndDisplay(number1, number2) {
-        document.getElementById("result").innerHTML = number1 + " " + number2;
-      }
+  function readAndDisplay(number1, number2) {
+    document.getElementById("result").innerHTML = number1 + " " + number2;
+  }
 
-      function isFactor(factor, number) {
-        if ((number % factor) == 0) {
-          return 1;
-        }
+  function isFactor(factor, number) {
+    if ((number % factor) == 0) {
+        return 1;
+    }
         return 0;
-      }
+  }
 
-      function showArray(array) {
-        document.getElementById("result").innerHTML = array;
-      }
+  function showArray(array) {
+    document.getElementById("result").innerHTML = array;
+  }
 
-      function addArray(array) {
-        var sum = 0;
-        for (var i = 0; i < array.length ; i++) {
+  function addArray(array) {
+    var sum = 0;
+      for (var i = 0; i < array.length ; i++) {
           sum = sum + array[i];
-        }
+      }
         return sum;
-      }
+  }
 
-      function getFactors(number) { 
-        var numArray = [];
-        for (var i = 0; i < number; i++) {
-          if (isFactor(i, number)) {
+  function getFactors(number) { 
+    var numArray = [];
+    for (var i = 0; i < number; i++) {
+        if (isFactor(i, number)) {
             numArray.push(i);
-          }
         }
-        return numArray;
-      }
+    }
+    return numArray;
+  } 
 </script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </html>
