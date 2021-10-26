@@ -1,176 +1,175 @@
-    <!DOCTYPE html">
-    <html>
-    <head>
-    <link href="jade_delightstylesheet.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+<!DOCTYPE html">
+<html>
+<head>
+<link href="jade_delightstylesheet.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
 
-    $(document).ready(function(){
-        $("table").on('change','select',
-        function(){
-            var currentRow = $(this).closest("tr"); 
-            var quantity = currentRow.find("td:eq(0) option:selected").text();
-            var price = currentRow.find("td:eq(2)").text();
-            price = price.substring(2);
+$(document).ready(function(){
+    $("table").on('change','select',
+    function(){
+        var currentRow = $(this).closest("tr"); 
+        var quantity = currentRow.find("td:eq(0) option:selected").text();
+        var price = currentRow.find("td:eq(2)").text();
+        price = price.substring(2);
             
-            var totalCost = calcPrice(parseFloat(quantity), parseFloat(price))
-            currentRow.find("td:eq(3) input").val(totalCost);
+        var totalCost = finalprice(parseFloat(quantity), parseFloat(price))
+        currentRow.find("td:eq(3) input").val(totalCost);
             
-            updateSubtotal(totalCost)
-            
-            updateTotal();
-        });
+        calcsubtotal(totalCost)  
+        calctotal();
     });
+});
 
-    $(document).ready(function(){
-        $('form').find('input[name="street"]').parent().hide();
-        $('form').find('input[name="city"]').parent().hide();
-        $('input:radio[name="p_or_d"]').change(
-        function(){
-            $('form').find('input[name="street"]').parent().toggle();
-            $('form').find('input[name="city"]').parent().toggle();
-            });
-        });
-
-    $(document).ready(function(){
-        $("form").submit(function(e){
-            var phoneNumber = $('form').find('input[name="phone"]').val();
-            var lname = $('form').find('input[name="lname"]').val();
-            var orderMethod = $("input[name='p_or_d']:checked").val();
-
-            var errorLog = "";
-
-            /* last name cannot be empty*/
-            if (lname == "") {
-                e.preventDefault();
-                errorLog = errorLog + "Please enter last name\n";
-            }
-
-            /* strips phone number and checks if is valid format*/
-            var validPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-            if(!phoneNumber.match(validPhone)) {
-                e.preventDefault();
-                errorLog = errorLog + "Invalid phone number\n";
-            } 
-
-            /* If delivery, check street and city*/
-            if (orderMethod == "delivery") {
-                var street = $('form').find('input[name="street"]').val();
-                var city = $('form').find('input[name="city"]').val();
-
-                if (street == "") {
-                    e.preventDefault();
-                    errorLog = errorLog + "Please provide street\n";
-                }
-
-                if (city == "") {
-                    e.preventDefault();
-                    errorLog = errorLog + "Please provide city\n";
-                }
-            }
-            if (errorLog === "") {
-                var deliveryTime = timeOrder(orderMethod);
-
-                var message = "THANK YOU FOR YOUR ORDER!\n";
-                message = message + "Your order will be ready at: " + deliveryTime + "\n\n";
-
-                message = message + "YOUR ORDER:\n"
-
-                $("table tr").each(function(){
-                    var quant = $(this).find("td:first option:selected").text(); 
-                    if (quant > 0) {
-                        message = message + quant + " " + $(this).find("td:nth-child(2)").text() + "\n";
-                    }
-                });
-
-                message = message + "\n" + "TOTAL: " + $('#total').val();
-                
-                alert(message);
-
-            } else {
-                alert("ERROR:\n" + errorLog);
-            }
-        });
+$(document).ready(function(){
+    $('form').find('input[name="street"]').parent().hide();
+    $('form').find('input[name="city"]').parent().hide();
+    $('input:radio[name="p_or_d"]').change(
+    function(){
+        $('form').find('input[name="street"]').parent().toggle();
+        $('form').find('input[name="city"]').parent().toggle();
     });
+});
 
-    function timeOrder (orderMethod) {
-        var d = new Date();
-        var minutes = d.getMinutes();
-        var hour = d.getHours();
+$(document).ready(function(){
+    $("form").submit(function(e){
+        var phoneNumber = $('form').find('input[name="phone"]').val();
+        var lname = $('form').find('input[name="lname"]').val();
+        var orderMethod = $("input[name='p_or_d']:checked").val();
+        var errorLog = "";
 
-        if (hour > 12) { 
-            hour = hour - 12;
+        /* check for last name */
+        if (lname == "") {
+            e.preventDefault();
+            errorLog = errorLog + "Please enter last name\n";
         }
-        var deliveryTime = 0;
 
+        /* check for valid phone number */
+        var validPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        if(!phoneNumber.match(validPhone)) {
+            e.preventDefault();
+            errorLog = errorLog + "Invalid phone number\n";
+        } 
+
+        /* check for valid street and city */
         if (orderMethod == "delivery") {
-            minutes = minutes + 30;
-            if (minutes > 60) {
-                hour = hour + 1;
-                minutes = minutes - 60;
-                if (minutes < 10) {
-                    minutes = "0" + minutes;
-                }
+            var street = $('form').find('input[name="street"]').val();
+            var city = $('form').find('input[name="city"]').val();
+            
+            if (street == "") {
+                e.preventDefault();
+                errorLog = errorLog + "Please provide street\n";
             }
-            deliveryTime = hour + ":" + minutes
-        } else {
-            minutes = minutes + 15;
-            if (minutes > 60) {
-                hour = hour + 1;
-                minutes = minutes - 60;
-                if (minutes < 10) {
-                    minutes = "0" + minutes;
-                }
+            if (city == "") {
+                e.preventDefault();
+                errorLog = errorLog + "Please provide city\n";
             }
-            deliveryTime = hour + ":" + minutes
         }
+        
+        if (errorLog === "") {
+            var deliveryTime = ordertime(orderMethod);
+            var message = "THANK YOU FOR YOUR ORDER!\n";
+            message = message + "Your order will be ready at: " + deliveryTime + "\n\n";
 
+            message = message + "YOUR ORDER:\n"
+            $("table tr").each(function(){
+                var quant = $(this).find("td:first option:selected").text(); 
+                if (quant > 0) {
+                    message = message + quant + " " + $(this).find("td:nth-child(2)").text() + "\n";
+                }
+            });
+
+            message = message + "\n" + "TOTAL: " + $('#total').val();     
+            
+            alert(message);
+        } else {
+            alert("ERROR:\n" + errorLog);
+        }
+    });
+});
+
+function ordertime (orderMethod) {
+    var d = new Date();
+    var minutes = d.getMinutes();
+    var hour = d.getHours();
+
+    if (hour > 12) { 
+        hour = hour - 12;
+    }
+
+    var deliveryTime = 0;
+
+    /* calculate delivery time */
+    if (orderMethod == "delivery") {
+        minutes = minutes + 30;
+        if (minutes > 60) {
+            hour = hour + 1;
+            minutes = minutes - 60;
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+        }
+        
+        deliveryTime = hour + ":" + minutes
+
+    } else {
+        /* calculate pickup time */
+        minutes = minutes + 15;
+        if (minutes > 60) {
+            hour = hour + 1;
+            minutes = minutes - 60;
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+        }
+        
+        deliveryTime = hour + ":" + minutes
+        
+    }
         return deliveryTime;
     }
 
-    function updateTotal() {
-        var subtotal = parseFloat($('#subtotal').val());
-        var tax = parseFloat($('#tax').val());
-
-        var total = (subtotal+ tax).toFixed(2)
-        $('#total').val(subtotal + tax);
-
+function calcsubtotal(totalCost) {
+    if(!$('#subtotal').val()){
+        $('#subtotal').val(totalCost);
+    } else{
+        var currentcost = parseInt($('#subtotal').val());
+        totalCost = currentcost + totalCost;
+        $('#subtotal').val(totalCost);
+    }
+    calctax(totalCost);
     }
 
-    function updateSubtotal(totalCost) {
-        if(!$('#subtotal').val()){
-            $('#subtotal').val(totalCost);
-        } else{
-            var currCost = parseInt($('#subtotal').val());
-            totalCost = currCost + totalCost;
-            $('#subtotal').val(totalCost);
-        }
-        calcTax(totalCost);
-    }
+function calctotal() {
+    var subtotal = parseFloat($('#subtotal').val());
+    var tax = parseFloat($('#tax').val());
 
-    function calcTax(totalCost) {
-        var tax = .0625;
-        tax = tax * totalCost;
-        tax = tax.toFixed(2);
-        $('#tax').val(tax);
+    var total = (subtotal+ tax).toFixed(2)
+    $('#total').val(subtotal + tax);
 
-    }
+}
 
-    function calcPrice (quantity, price, tax) {
-        var total = quantity * price;
-        return parseFloat(total.toFixed(2));
-    }
+function calctax(totalCost) {
+    var tax = .0625;
+    tax = tax * totalCost;
+    tax = tax.toFixed(2);
+    $('#tax').val(tax);
+}
 
-    </script>
+function finalprice (quantity, price, tax) {
+    var total = quantity * price;
+    return parseFloat(total.toFixed(2));
+}
 
+</script>
 
-    <title>Jade Delight</title>
-    </head>
+<title>Jade Delight</title>
+</head>
 
-    <body>
-    <script language="javascript">
+<body>
+<script language="javascript">
 
     function MenuItem(name, cost)
     {
@@ -242,6 +241,6 @@
 
     <input type = "submit" value = "Submit Order" />
 
-    </form>
-    </body>
-    </html>
+</form>
+</body>
+</html>
