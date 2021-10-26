@@ -104,7 +104,7 @@
         var deliveryTime = 0;
 
         if (orderMethod == "delivery") {
-            minutes = minutes + 15;
+            minutes = minutes + 30;
             if (minutes > 60) {
                 hour = hour + 1;
                 minutes = minutes - 60;
@@ -114,7 +114,7 @@
             }
             deliveryTime = hour + ":" + minutes
         } else {
-            minutes = minutes + 30;
+            minutes = minutes + 15;
             if (minutes > 60) {
                 hour = hour + 1;
                 minutes = minutes - 60;
@@ -230,7 +230,7 @@
     </script>
     </table>
     <p>Subtotal: 
-    $<input type="text"  name='subtotal' id="subtotal" />
+    $ <input type="text"  name='subtotal' id="subtotal" />
     </p>
     <p>Mass tax 6.25%:
     $ <input type="text"  name='tax' id="tax" />
