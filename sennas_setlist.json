@@ -1,0 +1,62 @@
+[
+  {
+    "Artist": "Chris Stapleton", 
+    "Title": "Traveller", 
+    "Genre": ["Country"],
+    "Year" : "2015"
+  },
+  { 
+    "Artist": "Violent Femmes", 
+    "Title": "Blister in the Sun", 
+    "Genre": ["Alternative", "Indie"],
+    "Year" : "1983"
+  },
+  { 
+    "Artist": "Kodak Black", 
+    "Title": "Transportin'", 
+    "Genre": ["Rap", "Hip Hop"],
+    "Year" : "2017"
+  },
+  { 
+    "Artist": "Marina", 
+    "Title": "Primadonna Girl", 
+    "Genre": ["Pop"],
+    "Year" : "2012"
+  },
+  { 
+    "Artist": "Bakar", 
+    "Title": "Hell n Back", 
+    "Genre": ["Alternative", "Indie"],
+    "Year" : "2019"
+  },
+  { 
+    "Artist": "The Chicks", 
+    "Title": "Travelin' Soldier", 
+    "Genre": ["Country"],
+    "Year" : "2002"
+  },
+  { 
+    "Artist": "Childish Gambino", 
+    "Title": "Redbone", 
+    "Genre": ["Hip Hop"],
+    "Year" : "2016"
+  },
+  { 
+    "Artist": "Indigo Girls", 
+    "Title": "Midnight Train to Georgia", 
+    "Genre": ["Soft Rock"],
+    "Year" : "1995"
+  },
+  { 
+    "Artist": "Rina Sawayama", 
+    "Title": "XS", 
+    "Genre": ["Rock","Alternative"],
+    "Year" : "2020"
+  },
+  { 
+    "Artist": "Mac Miller", 
+    "Title": "Good News", 
+    "Genre": ["Hip Hop", "Rap"],
+    "Year" : "2011"
+  }
+]
