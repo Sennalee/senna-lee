@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Setlist 2</title>
+    <script>
+
+        function displaySongs(){
+            request = new XMLHttpRequest();
+			request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+			request.onreadystatechange = function() {
+ 
+				if (request.readyState == 4 && request.status == 200) {
+                    var setlist = JSON.parse(request.responseText);
+                    var genre = document.getElementById("genres").value;
+                    var titles = [];
+                    for (var x in setlist) {
+                        for (var y in setlist[x].Genre) {
+                            if (setlist[x].Genre[y] === genre) {
+                                titles.push(setlist[x].Title);
+                            }
+                        }
+                    }
+                    txt = "";
+                    txt += "<table border='1'>"
+                    for (var x in titles) {
+                        txt += "<tr><td>" + titles[x] + "</td></tr>";
+                    }
+                    txt += "</table>"    
+                    document.getElementById("data").innerHTML = txt;
+
+                }
+				else if (request.readyState == 4 && request.status != 200) {
+				    document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+				}
+
+				else if (request.readyState == 3) {
+					document.getElementById("data").innerHTML = "Too soon!  Try again";
+				}
+
+			}
+			request.send();
+			console.log("4 - Request sent");
+        }
+
+		function loadFile(set) {
+			request = new XMLHttpRequest();
+			console.log("1 - request object created");
+ 
+			request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+
+			console.log("2 - opened request file");
+ 
+			request.onreadystatechange = function() {
+				console.log("3 - readystatechange event fired.");
+ 
+				if (request.readyState == 4 && request.status == 200) {
+
+                    //only serialized result
+					// result = request.responseText;
+                    // document.getElementById("data").innerHTML = result;
+
+                    // table format
+                    // var setlist = JSON.parse(request.responseText);
+                    // txt = "";
+                    // txt += "<table border='1'>"
+                    // for (var x in setlist) {
+                    //     txt += "<tr>" + "<td>" + setlist[x].Artist + "</td>" + "<td>" + setlist[x].Title + "</td>" + "<td>" + setlist[x].Genre + "</td>" + "<td>" + setlist[x].Year + "</td>" + "</tr>";
+                    // }
+                    // txt += "</table>"    
+                    // document.getElementById("data").innerHTML = txt;
+
+                    //genre dropdown
+                    var setlist = JSON.parse(request.responseText);
+                    var genres = []
+                    for (var x in setlist) {
+                        for (var y in setlist[x].Genre) {
+                            if (!(genres.includes(setlist[x].Genre[y]))) {
+                                genres.push(setlist[x].Genre[y]);
+                            }
+                        }
+                    }
+                    for (var g in genres) {
+                        option = document.createElement('option');
+                        var select = document.getElementById("genres");
+                        option.text = genres[g];
+                        option.value = genres[g];
+                        select.add(option);
+                    }
+				}
+				// else if (request.readyState == 4 && request.status != 200) {
+				//     document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+				// }
+
+				// else if (request.readyState == 3) {
+				// 	document.getElementById("data").innerHTML = "Too soon!  Try again";
+				// }
+
+			}
+			request.send();
+			console.log("4 - Request sent");
+		}
+	
+        
+    </script>
+    </head>
+    <body onload = "loadFile()">
+    <div>
+        <text id="data">
+
+        </text>
+        <form>
+            <select id="genres"></select><br>
+            <input type="button" value="filter" onclick="displaySongs()">
+        </form>
+    </div>
+  </body>
+</html>
