@@ -6,125 +6,106 @@
     <link rel='stylesheet' type="text/css" href="HW9stylesheet.css" />
 <script>
 
-    function FilterSongs(){
-        request = new XMLHttpRequest();
-		request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
-		request.onreadystatechange = function() {
-			if (request.readyState == 4 && request.status == 200) {
-                var setlist = JSON.parse(request.responseText);
-                var genre = document.getElementById("genres").value;
-                var titles = [];
-                for (var x in setlist) {
-                    for (var y in setlist[x].Genre) {
-                        if (setlist[x].Genre[y] === genre) {
+function FilterSongs(){
+    request = new XMLHttpRequest();
+	request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+	request.onreadystatechange = function() {
+		if (request.readyState == 4 && request.status == 200) {
+            var setlist = JSON.parse(request.responseText);
+            var genre = document.getElementById("genres").value;
+            var titles = [];
+            for (var x in setlist) {
+                for (var y in setlist[x].Genre) {
+                    if (setlist[x].Genre[y] === genre) {
                             titles.push(setlist[x].Title);
-                        }
                     }
                 }
-                txt = "";
-                txt += "<table>"
-                for (var x in titles) {
-                    txt += "<tr><td>" + titles[x] + "</td></tr>";
-                }
-                txt += "</table>"    
-                document.getElementById("data").innerHTML = txt;
             }
+            text = "";
+            text += "<table>"
+            for (var x in titles) {
+                text += "<tr><td>" + titles[x] + "</td></tr>";
+            }
+            text += "</table>"    
+            document.getElementById("data").innerHTML = text;
+        }
 			
-            else if (request.readyState == 4 && request.status != 200) {
-				document.getElementById("data").innerHTML = "Error";
-			}
-
-			else if (request.readyState == 3) {
-				document.getElementById("data").innerHTML = "Try again";
-			}
-
+        else if (request.readyState == 4 && request.status != 200) {
+			document.getElementById("data").innerHTML = "Error";
 		}
+
+		else if (request.readyState == 3) {
+			document.getElementById("data").innerHTML = "Try again";
+		}
+	}
 		
-        request.send();
-		console.log("4 - Request sent");
-    }
+    request.send();
+	console.log("4 - Request sent");
+}
 
-	function LoadFile(set) {
-		request = new XMLHttpRequest();
-		console.log("1 - request object created");
-		request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
-		console.log("2 - opened request file");
+function LoadFile(set) {
+	request = new XMLHttpRequest();
+	console.log("1 - request object created");
+	request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+	console.log("2 - opened request file");
         
+	request.onreadystatechange = function() {
+		console.log("3 - readystatechange event fired.");
+		if (request.readyState == 4 && request.status == 200) {
+			result = request.responseText;
+            document.getElementById("data").innerHTML = result;
 
-		request.onreadystatechange = function() {
-			console.log("3 - readystatechange event fired.");
-			if (request.readyState == 4 && request.status == 200) {
 
-                    //only serialized result
-					result = request.responseText;
-                    document.getElementById("data").innerHTML = result;
+            var setlist = JSON.parse(request.responseText);
+            text = "";
+            text += "<table>";
+            for (var x in setlist) {
+                text += "<tr>" + "<td>" + setlist[x].Title + "</td>" + "<td>" + setlist[x].Artist + "</td>" + "<td>" + setlist[x].Genre + "</td>" + "<td>" + setlist[x].Year + "</td>" + "</tr>";
+            }
+            text += "</table>";
+            document.getElementById("data").innerHTML = text;
 
-                    //table format
-                    var setlist = JSON.parse(request.responseText);
-                    txt = "";
-                    txt += "<table>";
-                    for (var x in setlist) {
-                         txt += "<tr>" + "<td>" + setlist[x].Title + "</td>" + "<td>" + setlist[x].Artist + "</td>" + "<td>" + setlist[x].Genre + "</td>" + "<td>" + setlist[x].Year + "</td>" + "</tr>";
-                     }
-                    txt += "</table>";
-
-                    document.getElementById("data").innerHTML = txt;
-
-                //genre dropdown
-                   var setlist = JSON.parse(request.responseText);
-                    var genres = [];
-                    for (var x in setlist) {
-                        for (var y in setlist[x].Genre) {
-                            if (!(genres.includes(setlist[x].Genre[y]))) {
-                               genres.push(setlist[x].Genre[y]);
-                            }
-                        }
+            var setlist = JSON.parse(request.responseText);
+            var genres = [];
+            for (var x in setlist) {
+                for (var y in setlist[x].Genre) {
+                    if (!(genres.includes(setlist[x].Genre[y]))) {
+                        genres.push(setlist[x].Genre[y]);
                     }
-                    for (var g in genres) {
-                        option = document.createElement('option');
-                        var select = document.getElementById("genres");
-                        option.text = genres[g];
-                        option.value = genres[g];
-                        select.add(option);
-                    }
-				}
-				// else if (request.readyState == 4 && request.status != 200) {
-				//     document.getElementById("data").innerHTML = "Error";
-				// }
-
-				// else if (request.readyState == 3) {
-				// 	document.getElementById("data").innerHTML = "Try again";
-				// }
-
-			}
-			request.send();
-			console.log("4 - Request sent");
+                }
+            }
+            
+            for (var g in genres) {
+                option = document.createElement('option');
+                var select = document.getElementById("genres");
+                option.text = genres[g];
+                option.value = genres[g];
+                select.add(option);
+            }
 		}
+	}
+	request.send();
+	console.log("4 - Request sent");
+}
 
+</script>
+</head>
 
-    </script>
-    </head>
 <body onload = "LoadFile()">
 
     <div style="font-size: 50px; font-family: 'Cooper Black'; color:#004EFF;"> Senna's Setlist </div>
-    
     <br>
     <div id = "string">
     [{"Title": "Traveller", "Artist": "Chris Stapleton", "Genre": ["Country"],"Year" : "2015"},{ "Title": "Blister in the Sun", "Artist": "Violent Femmes", "Genre": ["Alternative", "Indie"],"Year" : "1983"},{"Title": "Transportin'", "Artist": "Kodak Black", "Genre": ["Rap", "Hip Hop"],"Year" : "2017"},{ "Title": "Primadonna Girl", "Artist": "Marina", "Genre": ["Pop"],"Year" : "2012"},{ "Title": "Hell n Back", "Artist": "Bakar", "Genre": ["Alternative", "Indie"],"Year" : "2019"},{ "Title": "Travelin' Soldier", "Artist": "The Chicks","Genre": ["Country"],"Year" : "2002"},{ "Title": "Redbone", "Artist": "Childish Gambino", "Genre": ["Hip Hop"],"Year" : "2016"},{ "Title": "Midnight Train to Georgia", "Artist": "Indigo Girls", "Genre": ["Soft Rock"],"Year" : "1995"},{ "Title": "XS", "Artist": "Rina Sawayama", "Genre": ["Rock","Alternative"],"Year" : "2020"},{ "Title": "Good News", "Artist": "Mac Miller", "Genre": ["Hip Hop", "Rap"],"Year" : "2011"}]
         <br><br><br><br>
     </div>
-
     <div>
-
         <form>
             <select id="genres"></select><br>
             <input type="button" value="filter" onclick="FilterSongs()">
         </form>
         <br>
-
         <text id="data"></text>
-
-      
     </div>
 </body>
 </html>
