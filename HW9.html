@@ -1,63 +1,59 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-
+<head>
     <title>Senna's JSON Setlist</title>
     <link rel='stylesheet' type="text/css" href="HW9stylesheet.css" />
+<script>
 
-    <script>
-
-        function FilterSongs(){
-            request = new XMLHttpRequest();
-			request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
-			request.onreadystatechange = function() {
- 
-				if (request.readyState == 4 && request.status == 200) {
-                    var setlist = JSON.parse(request.responseText);
-                    var genre = document.getElementById("genres").value;
-                    var titles = [];
-                    for (var x in setlist) {
-                        for (var y in setlist[x].Genre) {
-                            if (setlist[x].Genre[y] === genre) {
-                                titles.push(setlist[x].Title);
-                            }
+    function FilterSongs(){
+        request = new XMLHttpRequest();
+		request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+                var setlist = JSON.parse(request.responseText);
+                var genre = document.getElementById("genres").value;
+                var titles = [];
+                for (var x in setlist) {
+                    for (var y in setlist[x].Genre) {
+                        if (setlist[x].Genre[y] === genre) {
+                            titles.push(setlist[x].Title);
                         }
                     }
-                    txt = "";
-                    txt += "<table border='1'>"
-                    for (var x in titles) {
-                        txt += "<tr><td>" + titles[x] + "</td></tr>";
-                    }
-                    txt += "</table>"    
-                    document.getElementById("data").innerHTML = txt;
-
                 }
-				else if (request.readyState == 4 && request.status != 200) {
-				    document.getElementById("data").innerHTML = "Error";
-				}
-
-				else if (request.readyState == 3) {
-					document.getElementById("data").innerHTML = "Too soon!  Try again";
-				}
-
+                txt = "";
+                txt += "<table border='1'>"
+                for (var x in titles) {
+                    txt += "<tr><td>" + titles[x] + "</td></tr>";
+                }
+                txt += "</table>"    
+                document.getElementById("data").innerHTML = txt;
+            }
+			
+            else if (request.readyState == 4 && request.status != 200) {
+				document.getElementById("data").innerHTML = "Error";
 			}
-			request.send();
-			console.log("4 - Request sent");
-        }
 
-		function LoadFile(set) {
-			request = new XMLHttpRequest();
-			console.log("1 - request object created");
- 
-			request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+			else if (request.readyState == 3) {
+				document.getElementById("data").innerHTML = "Try again";
+			}
 
-			console.log("2 - opened request file");
- 
-			request.onreadystatechange = function() {
-				console.log("3 - readystatechange event fired.");
- 
-				if (request.readyState == 4 && request.status == 200) {
+		}
+		
+        request.send();
+		console.log("4 - Request sent");
+    }
+
+	function LoadFile(set) {
+		request = new XMLHttpRequest();
+		console.log("1 - request object created");
+		request.open("GET", "https://sennalee.github.io/senna-lee/sennas_setlist.json", true);
+		console.log("2 - opened request file");
+        
+
+		request.onreadystatechange = function() {
+			console.log("3 - readystatechange event fired.");
+			if (request.readyState == 4 && request.status == 200) {
 
                     //only serialized result
 					result = request.responseText;
@@ -66,20 +62,21 @@
                     //table format
                     var setlist = JSON.parse(request.responseText);
                     txt = "";
-                    txt += "<table>"
+                    txt += "<table>";
                     for (var x in setlist) {
                          txt += "<tr>" + "<td>" + setlist[x].Artist + "</td>" + "<td>" + setlist[x].Title + "</td>" + "<td>" + setlist[x].Genre + "</td>" + "<td>" + setlist[x].Year + "</td>" + "</tr>";
                      }
-                    txt += "</table>"    
+                    txt += "</table>";
+
                     document.getElementById("data").innerHTML = txt;
 
-                    //genre dropdown
-                    var setlist = JSON.parse(request.responseText);
-                    var genres = []
+                //genre dropdown
+                   var setlist = JSON.parse(request.responseText);
+                    var genres = [];
                     for (var x in setlist) {
                         for (var y in setlist[x].Genre) {
                             if (!(genres.includes(setlist[x].Genre[y]))) {
-                                genres.push(setlist[x].Genre[y]);
+                               genres.push(setlist[x].Genre[y]);
                             }
                         }
                     }
@@ -92,23 +89,17 @@
                     }
 				}
 				// else if (request.readyState == 4 && request.status != 200) {
-				//     document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+				//     document.getElementById("data").innerHTML = "Error";
 				// }
 
 				// else if (request.readyState == 3) {
-				// 	document.getElementById("data").innerHTML = "Too soon!  Try again";
+				// 	document.getElementById("data").innerHTML = "Try again";
 				// }
 
 			}
 			request.send();
 			console.log("4 - Request sent");
 		}
-
-        $.get("https://sennalee.github.io/senna-lee/sennas_setlist.json",
-
-        function(data){
-        document.getElementById("string").innerHTML = data;
-        });
 
 
     </script>
@@ -117,19 +108,21 @@
     <div id = "bar">
         Senna's Setlist 
     </div> 
-    <br><br>
+    <br>
     <div id = "string">
-        {"Setlist" :[{"Title": "Traveller", "Artist": "Chris Stapleton", "Genre": ["Country"],"Year" : "2015"},{ "Title": "Blister in the Sun", "Artist": "Violent Femmes", "Genre": ["Alternative", "Indie"],"Year" : "1983"},{"Title": "Transportin'", "Artist": "Kodak Black", "Genre": ["Rap", "Hip Hop"],"Year" : "2017"},{ "Title": "Primadonna Girl", "Artist": "Marina", "Genre": ["Pop"],"Year" : "2012"},{ "Title": "Hell n Back", "Artist": "Bakar", "Genre": ["Alternative", "Indie"],"Year" : "2019"},{ "Title": "Travelin' Soldier", "Artist": "The Chicks","Genre": ["Country"],"Year" : "2002"},{ "Title": "Redbone", "Artist": "Childish Gambino", "Genre": ["Hip Hop"],"Year" : "2016"},{ "Title": "Midnight Train to Georgia", "Artist": "Indigo Girls", "Genre": ["Soft Rock"],"Year" : "1995"},{ "Title": "XS", "Artist": "Rina Sawayama", "Genre": ["Rock","Alternative"],"Year" : "2020"},{ "Title": "Good News", "Artist": "Mac Miller", "Genre": ["Hip Hop", "Rap"],"Year" : "2011"}]}
+    [{"Title": "Traveller", "Artist": "Chris Stapleton", "Genre": ["Country"],"Year" : "2015"},{ "Title": "Blister in the Sun", "Artist": "Violent Femmes", "Genre": ["Alternative", "Indie"],"Year" : "1983"},{"Title": "Transportin'", "Artist": "Kodak Black", "Genre": ["Rap", "Hip Hop"],"Year" : "2017"},{ "Title": "Primadonna Girl", "Artist": "Marina", "Genre": ["Pop"],"Year" : "2012"},{ "Title": "Hell n Back", "Artist": "Bakar", "Genre": ["Alternative", "Indie"],"Year" : "2019"},{ "Title": "Travelin' Soldier", "Artist": "The Chicks","Genre": ["Country"],"Year" : "2002"},{ "Title": "Redbone", "Artist": "Childish Gambino", "Genre": ["Hip Hop"],"Year" : "2016"},{ "Title": "Midnight Train to Georgia", "Artist": "Indigo Girls", "Genre": ["Soft Rock"],"Year" : "1995"},{ "Title": "XS", "Artist": "Rina Sawayama", "Genre": ["Rock","Alternative"],"Year" : "2020"},{ "Title": "Good News", "Artist": "Mac Miller", "Genre": ["Hip Hop", "Rap"],"Year" : "2011"}]
         <br>
     </div>
 
     <div>
+        <text id="data"></text>
+
         <form>
             <select id="genres"></select><br>
             <input type="button" value="filter" onclick="FilterSongs()">
         </form>
         <br>
-        <text id="data"></text>
+      
     </div>
 </body>
 </html>
