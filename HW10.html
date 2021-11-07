@@ -13,7 +13,7 @@
 			// Step 2: Set the URL for the AJAX request to be the JSON file
 
 	
-		request.open("GET", "https://cat-fact.herokuapp.com/facts", true);
+		request.open("GET", "https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?number=1", true);
 
 			console.log("2 - opened request file");
 
@@ -29,7 +29,7 @@
 					document.getElementById("data").innerHTML = result;
 					text = JSON.parse(result);
 
-					document.getElementById("data").innerHTML =text["text"];
+					document.getElementById("data").innerHTML =fact["fact"];
 
 				}
 				else if (request.readyState == 4 && request.status != 200) {
@@ -56,7 +56,7 @@
 <body onload="getDogFact()">
 
 	<h1> Dog Facts! </h1>
-	<div class="fact">
+	<div class="text">
 		Random Dog Fact:
 	<div id="data"></div>
 </div>
