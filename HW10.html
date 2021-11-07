@@ -27,9 +27,9 @@
 					console.log("5 - response received");
 					result = request.responseText;
 					document.getElementById("data").innerHTML = result;
-					fact = JSON.parse(result);
+					text = JSON.parse(result);
 
-					document.getElementById("data").innerHTML =fact["fact"];
+					document.getElementById("data").innerHTML =text["text"];
 
 				}
 				else if (request.readyState == 4 && request.status != 200) {
