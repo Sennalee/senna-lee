@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Random Dog Facts</title>
+<title>Random Cat Facts</title>
 <meta charset="utf-8">
+<link href="HW10_stylesheet.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gluten:wght@500&display=swap" rel="stylesheet">
 <script>
 		function getFact() {
 			
@@ -11,7 +14,7 @@
 
 
 	
-			request.open("GET", "https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?number=1", true);
+			request.open("GET", "https://catfact.ninja/fact", true);
 			console.log("2 - opened request file");
 
 
@@ -22,9 +25,10 @@
 					console.log("5 - response received");
 					result = request.responseText;
 					document.getElementById("data").innerHTML = result;
-					text = JSON.parse(result);
+					fact = JSON.parse(result);
 
 					document.getElementById("data").innerHTML =fact["fact"];
+
 
 				}
 				else if (request.readyState == 4 && request.status != 200) {
@@ -44,11 +48,36 @@
 
 <body onload="getFact()">
 
-	<h1> Dog Facts! </h1>
-	<div class="text">
-		Random Dog Fact:
+	<h1> Random Cat Facts! </h1>
+	<div class="text">Did you know?</div>
 	<div id="data"></div>
-</div>
+
 <br> <br>
+
+<div class="questions">
+Describe the API you selected and what it does: <br>
+
+This API gives random cat facts! Everytime the page is reloaded, the website will generate a 
+new cat fact. 
+<br><br>
+
+Cite the website where you found it: <br>
+
+https://catfact.ninja
+<br><br>
+
+Describe the options you used for the API request: <br>
+
+In order to get one random fact, I used document.getElementById to retreive the fact from the JSON string. The syntax I used was fact["fact"].  
+
+<br><br>
+
+Give two applications where this API would be helpful: <br>
+
+This API would be helpful to people who love cats and want to learn random cat facts. It is a fun and simple 
+way to learn more about cats. This API might also be useful for kids, as it is an easy educational platform to 
+use and can relieve boredom. 
+</div>
+
 
 </body></html>
