@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dog Facts</title>
+<title>Random Dog Facts</title>
 <meta charset="utf-8">
 <script>
-		function getDogFact() {
-			/* Step 1: Make instance of request object...
-			...to make HTTP request after page is loaded*/
+		function getFact() {
+			
 			request = new XMLHttpRequest();
 			console.log("1 - request object created");
 
-			// Step 2: Set the URL for the AJAX request to be the JSON file
 
 	
-		request.open("GET", "https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?number=1", true);
-
+			request.open("GET", "https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?number=1", true);
 			console.log("2 - opened request file");
 
-			// Step 3: set up event handler/callback
 
 			request.onreadystatechange = function() {
 
 				if (request.readyState == 4 && request.status == 200) {
 
-					// Step 5: wait for done + success
 					console.log("5 - response received");
 					result = request.responseText;
 					document.getElementById("data").innerHTML = result;
@@ -33,19 +28,13 @@
 
 				}
 				else if (request.readyState == 4 && request.status != 200) {
-
 					document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
-
 				}
-
 				else if (request.readyState == 3) {
-
 					document.getElementById("data").innerHTML = "Too soon!  Try again";
-
 				}
 
 			}
-		// Step 4: fire off the HTTP request
 			request.send();
 			console.log("4 - Request sent");
 		}
@@ -53,7 +42,7 @@
 </head>
 
 
-<body onload="getDogFact()">
+<body onload="getFact()">
 
 	<h1> Dog Facts! </h1>
 	<div class="text">
@@ -61,39 +50,5 @@
 	<div id="data"></div>
 </div>
 <br> <br>
-
- <div class="questions">
-
-	 <div class="title">
-Describe the API you selected and what it does:
-</div>
-This API gives random Dog Facts! Everytime the page is reloaded, the website will generate a 
-new dog fact. 
-<br><br>
-
- <div class="title">
-Cite the website where you found it:
-</div>
-https://cat-fact.herokuapp.com
-https://dog-facts-api.herokuapp.com
-<br><br>
-
- <div class="title">
-Describe the options you used for the API request:
-</div>
-In order to get a random fact, I changed the end of the url from "/all" to "?number=1". This retreived only one fact
-from the JSON dog-fact file, and allowed me to print it out to the user. 
-
-<br><br>
-
- <div class="title">
-Give two applications where this API would be helpful:
-</div>
-This API would be helpful to people who love dogs and want to learn random dog facts. It is a fun and simple 
-way to learn more about dogs. This API might also be helpful for kids to use, as it is an easy interface to 
-use and relieves boredom. 
-</div>
-
-
 
 </body></html>
