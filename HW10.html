@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Random Cat Facts</title>
+<title>Random Math Expressions</title>
 <meta charset="utf-8">
 <link href="HW10_stylesheet.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
@@ -12,9 +12,10 @@
 			request = new XMLHttpRequest();
 			console.log("1 - request object created");
 
+			//https://catfact.ninja/fact 
 
 	
-			request.open("GET", "https://catfact.ninja/fact", true);
+			request.open("GET", "https://x-math.herokuapp.com/api/random", true);
 			console.log("2 - opened request file");
 
 
@@ -25,10 +26,11 @@
 					console.log("5 - response received");
 					result = request.responseText;
 					document.getElementById("data").innerHTML = result;
-					fact = JSON.parse(result);
+					expression = JSON.parse(result);
 
-					document.getElementById("data").innerHTML =fact["fact"];
+					answer = JSON.parse(result);
 
+					document.getElementById("data").innerHTML =expression["expression"] + " = " + answer["answer"];
 
 				}
 				else if (request.readyState == 4 && request.status != 200) {
@@ -48,35 +50,34 @@
 
 <body onload="getFact()">
 
-	<h1> Random Cat Facts! </h1>
+	<h1> Random Math Practice! </h1>
 	<div class="text">Did you know?</div>
+	<br>
 	<div id="data"></div>
 
 <br> <br>
 
 <div class="questions">
-Describe the API you selected and what it does: <br>
+<strong>Describe the API you selected and what it does: </strong><br>
 
-This API gives random cat facts! Everytime the page is reloaded, the website will generate a 
-new cat fact. 
+This API gives random math expressions and the answer. Everytime the page is reloaded, the website will generate a 
+new math expression and what the solution is. 
 <br><br>
 
-Cite the website where you found it: <br>
+<strong>Cite the website where you found it:</strong> <br>
 
-https://catfact.ninja
+https://x-math.herokuapp.com/api/random
 <br><br>
 
-Describe the options you used for the API request: <br>
+<strong>Describe the options you used for the API request:</strong> <br>
 
-In order to get one random fact, I used document.getElementById to retreive the fact from the JSON string. The syntax I used was fact["fact"].  
+In order to get a random math expression, I first used JSON.parse() to separate the string. Then, I used document.getElementById to retreive the math expression from the JSON string. The syntax I used was expression["expression"]. To retrieve the answer to the math expression generated, I used answer["answer"] in order to extract the answer value out of the JSON string. 
 
 <br><br>
 
-Give two applications where this API would be helpful: <br>
+<strong>Give two applications where this API would be helpful:</strong> <br>
 
-This API would be helpful to people who love cats and want to learn random cat facts. It is a fun and simple 
-way to learn more about cats. This API might also be useful for kids, as it is an easy educational platform to 
-use and can relieve boredom. 
+This API would be helpful to people who love math! This might also be helpful for those looking to improve their math skills, as they can practice solving the math expression first before looking at the answer. For parents wanting to help their child improve at math, this might be useful.  
 </div>
 
 
