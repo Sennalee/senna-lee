@@ -7,46 +7,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@500&display=swap" rel="stylesheet">
 <script>
-		function getFact() {
+function getFact() {
 			
-			request = new XMLHttpRequest();
-			console.log("1 - request object created");
+	request = new XMLHttpRequest();
+	console.log("1 - request object created");
 
-			//https://catfact.ninja/fact 
+	request.open("GET", "https://x-math.herokuapp.com/api/random", true);
+	console.log("2 - opened request file");
 
-	
-			request.open("GET", "https://x-math.herokuapp.com/api/random", true);
-			console.log("2 - opened request file");
+	request.onreadystatechange = function() {
 
+		if (request.readyState == 4 && request.status == 200) {
 
-			request.onreadystatechange = function() {
+			console.log("5 - response received");
+			result = request.responseText;
+			document.getElementById("data").innerHTML = result;
+			expression = JSON.parse(result);
+			answer = JSON.parse(result);
 
-				if (request.readyState == 4 && request.status == 200) {
+			document.getElementById("data").innerHTML =expression["expression"] + " = " + answer["answer"];
 
-					console.log("5 - response received");
-					result = request.responseText;
-					document.getElementById("data").innerHTML = result;
-					expression = JSON.parse(result);
-
-					answer = JSON.parse(result);
-
-					document.getElementById("data").innerHTML =expression["expression"] + " = " + answer["answer"];
-
-				}
-				else if (request.readyState == 4 && request.status != 200) {
-					document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
-				}
-				else if (request.readyState == 3) {
-					document.getElementById("data").innerHTML = "Too soon!  Try again";
-				}
-
-			}
-			request.send();
-			console.log("4 - Request sent");
 		}
-	</script>
-</head>
+		
+		else if (request.readyState == 4 && request.status != 200) {
+			document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+		}
+		else if (request.readyState == 3) {
+			document.getElementById("data").innerHTML = "Too soon!  Try again";
+		}
+	}
 
+	request.send();
+	console.log("4 - Request sent");
+
+}
+</script>
+</head>
 
 <body onload="getFact()">
 
@@ -55,30 +51,24 @@
 	<br>
 	<div id="data"></div>
 
-<br> <br>
+	<br><br>
 
-<div class="questions">
-<strong>Describe the API you selected and what it does: </strong><br>
+	<div class="questions">
+		<strong>Describe the API you selected and what it does: </strong><br>
+		This API gives random math expressions and the answer. Everytime the page is reloaded, the website will generate a 
+		new math expression and what the solution is. 
+		<br><br>
 
-This API gives random math expressions and the answer. Everytime the page is reloaded, the website will generate a 
-new math expression and what the solution is. 
-<br><br>
+		<strong>Cite the website where you found it:</strong> <br>
+		https://x-math.herokuapp.com/api/random
+		<br><br>
 
-<strong>Cite the website where you found it:</strong> <br>
+		<strong>Describe the options you used for the API request:</strong> <br>
+		In order to get a random math expression, I first used JSON.parse() to separate the string. Then, I used document.getElementById to retreive the math expression from the JSON string. The syntax I used was expression["expression"]. To retrieve the answer to the math expression generated, I used answer["answer"] in order to extract the answer value out of the JSON string. 
+		<br><br>
 
-https://x-math.herokuapp.com/api/random
-<br><br>
-
-<strong>Describe the options you used for the API request:</strong> <br>
-
-In order to get a random math expression, I first used JSON.parse() to separate the string. Then, I used document.getElementById to retreive the math expression from the JSON string. The syntax I used was expression["expression"]. To retrieve the answer to the math expression generated, I used answer["answer"] in order to extract the answer value out of the JSON string. 
-
-<br><br>
-
-<strong>Give two applications where this API would be helpful:</strong> <br>
-
-This API would be helpful to people who love math! This might also be helpful for those looking to improve their math skills, as they can practice solving the math expression first before looking at the answer. For parents wanting to help their child improve at math, this might be useful.  
-</div>
-
-
-</body></html>
+		<strong>Give two applications where this API would be helpful:</strong> <br>
+		This API would be helpful to people who love math! This might also be helpful for those looking to improve their math skills, as they can practice solving the math expression first before looking at the answer. For parents wanting to help their child improve at math, this might be useful.  
+		</div>
+</body>
+</html>
