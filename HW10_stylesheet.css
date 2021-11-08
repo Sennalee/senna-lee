@@ -3,7 +3,6 @@ body{
 	padding-left: 30px;
 	padding-right: 30px;
 	background-color: #FDFD96;
-	text-align: center;
 }
 
 h1{
@@ -11,16 +10,19 @@ h1{
 	font-family: 'Henny Penny', cursive;
 	font-size: 55px;
 	background-color: #A6D609;
+	text-align: center;
 }
 
 .text{
 	font-family: 'Gluten';
 	font-size: 30px;
+	text-align: center;
 }
 
 #data{
 	font-size: 50px;
 	font-family: 'Gluten';
+	text-align: center;
 }
 
 
